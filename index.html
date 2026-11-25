@@ -109,6 +109,7 @@
           My dissertation focuses on action decoding, recovery without losing existing capabilities, and active tactile sensing for humanoid control.
           I am also exploring how these ideas apply to autonomous scanning-probe measurements.
         </p>
+        <p><a href="#persona-robot-bench">View the PersonaRobotBench figures</a></p>
       </section>
 
       <!-- Research -->
@@ -118,45 +119,31 @@
         <article class="research-item focus" id="current-focus">
           <p class="kicker">Current focus</p>
           <div class="research-head">
-            <h3>Reliable robot control and active probing</h3>
-            <span class="badge">In progress</span>
+            <h3>Whole-body touch for humanoid robots</h3>
           </div>
-          <p class="focus-question">
-            When is the current observation sufficient to act, and when is another physical measurement worth taking?
-          </p>
           <p>
-            My dissertation studies how a learned controller should choose an action from a policy's predictions,
-            add a recovery behavior while preserving prior successes, and use touch to improve contact decisions in humanoid loco-manipulation.
+            I study how whole-body tactile sensing helps humanoid robots respond to physical contact.
+            In simulation, I test which body regions provide useful information beyond joint sensing and external force estimates.
           </p>
-          <p>
-            I am exploring autonomous scanning-probe microscopy as a related application.
-            The first proposed study is to test whether a workflow can locate a bowtie structure on a reference sample,
-            choose the next scan location, and obtain a usable scan. I plan to evaluate scan quality, human interventions, and unnecessary rescans.
-          </p>
-          <p>
-            Two proposed experiments ask whether an extra measurement improves the next decision: predicting a nickelate film's
-            response to a write pulse, and locating a semiconductor interface by choosing where to scan or when to change excitation energy.
-          </p>
-          <p class="tags">Robot Learning, Active Sensing, Recovery, Tactile Perception, Scanning-Probe Microscopy</p>
         </article>
 
         <article class="research-item" id="persona-robot-bench">
           <div class="research-head">
             <h3>PersonaRobotBench</h3>
           </div>
+          <figure class="media figure-plot">
+            <a href="assets/research/persona-travel-packing.webp" target="_blank" rel="noopener"><img src="assets/research/persona-travel-packing.webp" width="1800" height="465" loading="eager" alt="Travel packing in Isaac Sim. The shared scene has an empty suitcase and six items. One target places clothing in the suitcase; the other packs a wallet, charger, and toiletries."></a>
+            <figcaption>Travel packing. For “Pack my bag,” one user prioritizes clothing and the other prioritizes everyday essentials. The panels show the shared starting scene and both reference layouts.</figcaption>
+          </figure>
+          <figure class="media figure-plot">
+            <a href="assets/research/persona-serving-tray.webp" target="_blank" rel="noopener"><img src="assets/research/persona-serving-tray.webp" width="1800" height="465" loading="eager" alt="Serving tray loading in Isaac Sim. Starting from an empty tray, one target centers the heavier items and the other places the cup and snack container near the front."></a>
+            <figcaption>Serving tray loading. The same objects are arranged either to balance the tray or to keep the cup and snacks easy to reach. The panels show reference layouts rendered in Isaac Sim.</figcaption>
+          </figure>
           <p>
             A benchmark for evaluating whether robot policies infer a user's preferences and carry them out.
             Across 100 everyday tasks and 217 preference variants, the benchmark evaluates preference inference and physical execution separately.
             A simulated Unitree G1 starts from the same scene and receives the same instruction across variants, allowing comparisons across target preferences under matched starting conditions.
           </p>
-          <figure class="media figure-plot">
-            <a href="assets/research/persona-travel-packing.webp" target="_blank" rel="noopener"><img src="assets/research/persona-travel-packing.webp" width="1800" height="465" loading="lazy" alt="Travel packing in Isaac Sim. The shared scene has an empty suitcase and six items. One target places clothing in the suitcase; the other packs a wallet, charger, and toiletries."></a>
-            <figcaption>Travel packing. For “Pack my bag,” one user prioritizes clothing and the other prioritizes everyday essentials. The panels show the shared starting scene and both reference layouts.</figcaption>
-          </figure>
-          <figure class="media figure-plot">
-            <a href="assets/research/persona-serving-tray.webp" target="_blank" rel="noopener"><img src="assets/research/persona-serving-tray.webp" width="1800" height="465" loading="lazy" alt="Serving tray loading in Isaac Sim. Starting from an empty tray, one target centers the heavier items and the other places the cup and snack container near the front."></a>
-            <figcaption>Serving tray loading. The same objects are arranged either to balance the tray or to keep the cup and snacks easy to reach. The panels show reference layouts rendered in Isaac Sim.</figcaption>
-          </figure>
           <p class="tags">Robot Learning, Human–Robot Interaction, Personalized Robot Execution, Humanoid Simulation</p>
         </article>
 
