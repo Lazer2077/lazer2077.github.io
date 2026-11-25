@@ -29,7 +29,8 @@
    "sameAs":["https://github.com/Lazer2077","https://www.linkedin.com/in/zongtan-li-92120a28a"]}
   </script>
   <script>
-    var t = 'dark'; try { if (localStorage.getItem('theme') === 'light') t = 'light'; } catch (e) {} document.documentElement.setAttribute('data-theme', t); document.documentElement.classList.add('js');
+    var t = null; try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', t); document.documentElement.classList.add('js');
   </script>
 </head>
 <body>
@@ -92,6 +93,7 @@
             <div>
               <div class="tl-head"><strong>University of Georgia</strong><span>2023 – present</span></div>
               <div>Ph.D. Student, College of Engineering</div>
+              <div>Advisor: Prof. Tianming Liu</div>
               <div class="muted">Physical AI, Robot Learning, Reinforcement Learning, Motion Control, Control Theory, Computer Vision</div>
             </div>
           </li>
@@ -133,12 +135,12 @@
         <nav class="research-index" aria-label="Research at a glance">
           <ol>
             <li><a href="#current-focus">Whole-body touch for humanoid robots</a><span>Current focus</span></li>
-            <li><a href="#persona-robot-bench">PersonaRobotBench: preference-aware humanoid execution</a><span>Benchmark</span></li>
             <li><a href="#retiming">Faster imitation by re-timing demonstrations</a><span>Under review</span></li>
             <li><a href="#sequential-recovery">Sequential recovery updates for humanoid controllers</a><span>Under review</span></li>
             <li><a href="#etic">Correction timing for frozen policies under actuation faults</a><span>In preparation</span></li>
             <li><a href="#decision-relevant-memory">Decision-relevant memory in partially observed control</a><span>In preparation</span></li>
             <li><a href="#cyclic-estimation">Cyclic state estimation under partial observation</a><span>Submitted, TMLR</span></li>
+            <li><a href="#persona-robot-bench">PersonaRobotBench: preference-aware humanoid execution</a><span>Team benchmark, contributor</span></li>
             <li><a href="#ev-eco-driving">Vehicle dynamics and powertrain co-optimization for EVs</a><span>ACC 2025</span></li>
           </ol>
         </nav>
@@ -154,25 +156,6 @@
           </p>
         </article>
 
-        <article class="research-item" id="persona-robot-bench">
-          <div class="research-head">
-            <h3>PersonaRobotBench</h3>
-          </div>
-          <figure class="media figure-plot">
-            <a href="assets/research/persona-travel-packing.webp" target="_blank" rel="noopener"><img src="assets/research/persona-travel-packing.webp" width="1800" height="465" loading="eager" alt="Travel packing in Isaac Sim. The shared scene has an empty suitcase and six items. One target places clothing in the suitcase; the other packs a wallet, charger, and toiletries."></a>
-            <figcaption>Travel packing. For “Pack my bag,” one user prioritizes clothing and the other prioritizes everyday essentials. The panels show the shared starting scene and both reference layouts.</figcaption>
-          </figure>
-          <figure class="media figure-plot">
-            <a href="assets/research/persona-serving-tray.webp" target="_blank" rel="noopener"><img src="assets/research/persona-serving-tray.webp" width="1800" height="465" loading="eager" alt="Serving tray loading in Isaac Sim. Starting from an empty tray, one target centers the heavier items and the other places the cup and snack container near the front."></a>
-            <figcaption>Serving tray loading. The same objects are arranged either to balance the tray or to keep the cup and snacks easy to reach. The panels show reference layouts rendered in Isaac Sim.</figcaption>
-          </figure>
-          <p>
-            A benchmark for evaluating whether robot policies infer a user's preferences and carry them out.
-            Across 100 everyday tasks and 217 preference variants, the benchmark evaluates preference inference and physical execution separately.
-            A simulated Unitree G1 starts from the same scene and receives the same instruction across variants, allowing comparisons across target preferences under matched starting conditions.
-          </p>
-          <p class="tags">Robot Learning, Human–Robot Interaction, Personalized Robot Execution, Humanoid Simulation</p>
-        </article>
 
         <article class="research-item" id="retiming">
           <div class="research-head">
@@ -301,8 +284,8 @@
           </div>
           <p>
             Which part of an early sensor reading is worth sending when the receiver may get another measurement before choosing an action?
-            We study a one-bit message from an early sensor packet. The receiver retains its own observations and state estimate.
-            We characterize which distinctions the message must preserve for a given decision and derive an encoding objective for linear-quadratic control based on the cost of estimation errors.
+            I study a one-bit message from an early sensor packet. The receiver retains its own observations and state estimate.
+            I characterize which distinctions the message must preserve for a given decision and derive an encoding objective for linear-quadratic control based on the cost of estimation errors.
           </p>
           <figure class="media figure-plot">
             <a href="assets/research/decision-memory-overview.webp" target="_blank" rel="noopener"><img src="assets/research/decision-memory-overview.webp" width="1500" height="445" loading="lazy" alt="A writer sends one bit before the reader receives later observations. In the exact binary example, the preferred encoding switches when the later observation has a 50 percent chance of arriving."></a>
@@ -376,6 +359,32 @@
             and 63.3 for matched Bayes in the default setting. The learned filter matched or exceeded GRU across 75 settings, with a positive paired bootstrap interval in 47.
           </p>
           <p class="tags">State Estimation, Partial Observability, Cyclic Filtering, Inertial Sensing</p>
+        </article>
+
+        <article class="research-item" id="persona-robot-bench">
+          <div class="research-head">
+            <h3>PersonaRobotBench</h3>
+            <span class="badge">Team benchmark led by Haodi Hu (USC) · contributor</span>
+          </div>
+          <figure class="media figure-plot">
+            <a href="assets/research/persona-travel-packing.webp" target="_blank" rel="noopener"><img src="assets/research/persona-travel-packing.webp" width="1800" height="465" loading="eager" alt="Travel packing in Isaac Sim. The shared scene has an empty suitcase and six items. One target places clothing in the suitcase; the other packs a wallet, charger, and toiletries."></a>
+            <figcaption>Travel packing. For “Pack my bag,” one user prioritizes clothing and the other prioritizes everyday essentials. The panels show the shared starting scene and both reference layouts.</figcaption>
+          </figure>
+          <figure class="media figure-plot">
+            <a href="assets/research/persona-serving-tray.webp" target="_blank" rel="noopener"><img src="assets/research/persona-serving-tray.webp" width="1800" height="465" loading="eager" alt="Serving tray loading in Isaac Sim. Starting from an empty tray, one target centers the heavier items and the other places the cup and snack container near the front."></a>
+            <figcaption>Serving tray loading. The same objects are arranged either to balance the tray or to keep the cup and snacks easy to reach. The panels show reference layouts rendered in Isaac Sim.</figcaption>
+          </figure>
+          <p>
+            A benchmark for evaluating whether robot policies infer a user's preferences and carry them out.
+            Across 100 everyday tasks and 217 preference variants, the benchmark evaluates preference inference and physical execution separately.
+            A simulated Unitree G1 starts from the same scene and receives the same instruction across variants, allowing comparisons across target preferences under matched starting conditions.
+          </p>
+          <p>
+            My contributions: I was a main contributor to the video-to-demonstration (V2D) pipeline, building 80 V2D clips and defining their success criteria;
+            I proposed and implemented two of the tasks (supply-rack arrangement and medication preparation); and I ran the GR00T evaluation.
+          </p>
+          <p><a href="https://hhd000exe.github.io/PersonaRobotBench-website/" target="_blank" rel="noopener">Benchmark website</a></p>
+          <p class="tags">Robot Learning, Human–Robot Interaction, Personalized Robot Execution, Humanoid Simulation</p>
         </article>
 
         <article class="research-item" id="ev-eco-driving">
