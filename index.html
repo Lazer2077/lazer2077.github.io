@@ -249,9 +249,8 @@
             <h3>Correction Fidelity and Timing for Frozen Policies under Actuation Interface Faults</h3>
           </div>
           <p>
-            This work follows up on Efference-Copy Adaptation (ECA), which used prediction errors from a model of the healthy system
-            to correct a frozen policy's commands online. We focus on actuator interface faults and ask whether recovery fails
-            because the correction starts too late or because the command sent at that time is inaccurate.
+            A frozen control policy can fail when an actuator interface reorders channels or reverses their signs.
+            We study whether recovery fails because the correction starts too late or because the command sent at that time is inaccurate.
           </p>
           <p>
             We replay trials with the simulator's exact inverse at the controller's intervention time and at a reference time
@@ -267,43 +266,20 @@
           <p class="tags">Frozen Policies, Fault Recovery, System Identification, Robot Control</p>
         </article>
 
-        <article class="research-item">
+        <article class="research-item" id="decision-relevant-memory">
           <div class="research-head">
-            <h3>Heterogeneous recurrence for partially observed control</h3>
+            <h3>Decision-Relevant Memory in Partially Observed Control</h3>
           </div>
           <p>
-            Memory architectures for partially observed control are usually ranked by average return, without asking whether their inductive bias matches what the observation hides.
-            On masked MuJoCo it matters: a structured prior–innovation recurrence beats a GRU when the hidden variable is a derivative of the observation, but not when it is an integral.
-            DuoCell splits one recurrent state budget between the two constructions and lets the policy weigh both.
+            What should a controller remember from an early sensor reading when it can store just one bit?
+            We characterize which distinctions that bit must preserve for a later decision, given the observations the controller may receive in the meantime.
+            A simple example shows that a later measurement can change the best one-bit encoding.
           </p>
-          <div class="stats">
-            <div class="stat"><strong>+0.456</strong><span>normalized IQM over a tuned TransformerXL in the derivative regime, on held-out seeds</span></div>
-            <div class="stat"><strong>5×</strong><span>training budget, where the lead holds and widens</span></div>
-          </div>
-          <figure class="media figure-plot figure-lead">
-            <a href="assets/research/duocell-step.png" target="_blank" rel="noopener"><img src="assets/research/duocell-step.png" width="1236" height="631" loading="lazy" alt="One DuoCell step: a structured predict-correct-reread path and a GRU path run in parallel on a shared embedding and are concatenated"></a>
-            <figcaption>One DuoCell step. A structured predict–correct–reread path and a GRU path share an encoder and a fixed state budget.</figcaption>
-          </figure>
-          <figure class="media table-figure">
-            <div class="table-wrap">
-              <table class="data-table">
-                <thead><tr><th>Hidden velocities (mean AUC)</th><th>DuoCell, default</th><th>DuoCell, tuned</th><th>TransformerXL, tuned</th></tr></thead>
-                <tbody>
-                  <tr><th scope="row">Hopper-P</th><td>491.6</td><td><b>679.8</b></td><td>436.3</td></tr>
-                  <tr><th scope="row">Walker-P</th><td>457.5</td><td><b>500.2</b></td><td>296.0</td></tr>
-                  <tr><th scope="row">HalfCheetah-P</th><td>782.6</td><td><b>1505.1</b></td><td>1250.4</td></tr>
-                  <tr><th scope="row">Ant-P</th><td>391.5</td><td><b>431.2</b></td><td>415.4</td></tr>
-                  <tr class="ours"><th scope="row">Normalized IQM</th><td>0.322</td><td><b>0.770</b></td><td>0.223</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <figcaption>Masked MuJoCo with positions observed and velocities hidden. Both arms get the same per-environment learning-rate search; on held-out seeds the lead over TransformerXL is +0.456 normalized IQM.</figcaption>
-          </figure>
           <p>
-            Follow-up work asks which distinctions a memory with a fixed bit budget must preserve for a later control decision,
-            and how the best encoding changes when the controller can obtain another measurement.
+            In simulated Reacher control, two fixed encodings swap their ranking when the probability of receiving an extra measurement rises from 20% to 85%.
+            Selecting an encoding for each measurement rate lowers average control cost by 3.45–4.61% across three test settings compared with using one encoding fitted to both rates.
           </p>
-          <p class="tags">Reinforcement Learning, POMDPs, Recurrent Policies, Belief Filtering</p>
+          <p class="tags">Partial Observability, Control, Memory, Information Theory</p>
         </article>
 
         <article class="research-item" id="cyclic-estimation">
@@ -311,7 +287,7 @@
             <h3>Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation</h3>
           </div>
           <p>
-            This follow-up extends cyclic counting to state estimation with noisy and missing observations.
+            We study how to estimate cyclic states when observations are noisy or missing.
             When an increment is observed exactly, a phase rotation advances the state. When it is uncertain, a cyclic filter
             assigns probability to several possible shifts and revises its belief when a measurement arrives.
             A shared planner uses these estimates to test how belief quality changes the decision to sense again.
@@ -415,7 +391,7 @@
 
         <h3 class="pub-group">Manuscripts in preparation</h3>
         <ol class="pubs">
-          <li><span class="title">Decision-Relevant Memory in Partially Observed Control.</span>
+          <li><span class="title"><a href="#decision-relevant-memory">Decision-Relevant Memory in Partially Observed Control.</a></span>
             <span class="authors"><b>Z. Li</b>, T. Liu.</span></li>
           <li><span class="title"><a href="#etic">Correction Fidelity and Timing for Frozen Policies under Actuation Interface Faults.</a></span></li>
         </ol>
