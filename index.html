@@ -59,6 +59,7 @@
 
   <div class="layout container" id="top">
     <aside class="sidebar">
+      <div class="profile">
       <img class="photo" src="assets/photo.jpg" width="200" height="200" alt="Portrait of Zongtan Li">
       <h1>Zongtan Li</h1>
       <p class="role">Ph.D. Student<br>University of Georgia</p>
@@ -73,6 +74,7 @@
         <li class="muted-item">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Athens, GA</li>
       </ul>
+      </div>
 
       <div class="side-block">
         <h2 class="sub">Education</h2>
@@ -123,7 +125,6 @@
           My dissertation focuses on action decoding, recovery without losing existing capabilities, and active tactile sensing for humanoid control.
           I am also exploring how these ideas apply to autonomous scanning-probe measurements.
         </p>
-        <p><a href="#persona-robot-bench">View the PersonaRobotBench figures</a></p>
       </section>
 
       <!-- Research -->
@@ -180,16 +181,16 @@
           </div>
           <p>
             A policy trained on human teleoperation inherits the operator's pace. Speeding up the demonstrations works only until success collapses at 2–3×.
-            I show the collapse has a mechanical cause: merged commands ask for more displacement per control period than the low-level controller can deliver,
+            The evidence points to a mechanical cause: merged commands ask for more displacement per control period than the low-level controller can deliver,
             and the share of such pairs in the training data predicts where the retrained policy fails.
             The fix is a one-parameter rule that merges consecutive commands only while their sum stays realizable.
             It keeps the demonstrated path and speeds up only where the demonstrator left slack.
           </p>
 
           <div class="stats">
-            <div class="stat"><strong>120 → 93<small> s</small></strong><span>real-arm pick-and-place, 22.5% faster than the demonstration</span></div>
+            <div class="stat"><strong>120 → 93<small> s</small></strong><span>real-arm replay of re-timed pick-and-place commands, 22.5% shorter than the demonstration</span></div>
             <div class="stat"><strong>≤ 4<small> mm</small></strong><span>grasp-point error on hardware, vs. 8 cm for uniform re-timing</span></div>
-            <div class="stat"><strong>96%<small> vs 60%</small></strong><span>success on Robomimic Can, vs. uniform 2× speed-up</span></div>
+            <div class="stat"><strong>96%<small> vs 60%</small></strong><span>success on Robomimic Can, vs. uniform 2× speed-up (92 vs. 83 mean steps)</span></div>
             <div class="stat"><strong>71%<small> @ 2.3×</small></strong><span>of 429 clips on a G1 whole-body tracker (uniform: 51% @ 2×)</span></div>
           </div>
           <figure class="media">
@@ -344,7 +345,7 @@
             A shared planner uses these estimates to test how belief quality changes the decision to sense again.
           </p>
           <div class="stats">
-            <div class="stat"><strong>5.839 to 0.966 nats</strong><span>final-state negative log likelihood in a simulated valve with 1% token misreads; matched Bayes reached 0.965 nats</span></div>
+            <div class="stat"><strong>1.386 to 0.966 nats</strong><span>final-state negative log likelihood, LSTM to cyclic filter, in a simulated valve with 1% token misreads; matched Bayes reached 0.965</span></div>
             <div class="stat"><strong>20.2° to 12.8°</strong><span>120-second heading error on BROAD when a bias state is added to phase rotation</span></div>
             <div class="stat"><strong>12.33% to 9.04%</strong><span>gait-phase RMSE as a share of a cycle, comparing LSTM with the cyclic filter with three-second sensor dropouts on Camargo</span></div>
           </div>
@@ -432,10 +433,6 @@
             <span class="authors"><b>Z. Li</b>, T. Liu, Y. Zhao.</span> <span class="venue">Under review.</span></li>
           <li><span class="title">Faster Imitation by Re-timing Demonstrations Within the Controller Limit.</span>
             <span class="authors"><b>Z. Li</b>, Y. Zhao, T. Liu.</span> <span class="venue">Under review.</span></li>
-        </ol>
-
-        <h3 class="pub-group">Submitted manuscripts</h3>
-        <ol class="pubs">
           <li><span class="title"><a href="#cyclic-estimation">Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation.</a></span>
             <span class="authors"><b>Z. Li</b>, P. Shu, H. Jiang, T. Liu.</span> <span class="venue">Submitted to TMLR.</span></li>
         </ol>

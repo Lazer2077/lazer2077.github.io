@@ -312,13 +312,16 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
   .research-item { scroll-margin-top: 104px; }
   .theme-switch button span { display: none; }
   .theme-switch button { padding: 0 9px; }
-  /* Compact profile header: photo beside the name */
-  .sidebar { display: grid; grid-template-columns: 96px 1fr; column-gap: 18px; align-items: center; }
-  .sidebar > .photo { width: 96px; height: 96px; margin: 0; grid-row: span 3; }
-  .sidebar > h1 { font-size: 24px; }
-  .sidebar > .role { margin: 4px 0 0; font-size: 14.5px; }
-  .sidebar > .side-links, .sidebar > .side-block { grid-column: 1 / -1; }
-  .sidebar > .side-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 16px; }
+  /* Phones: profile header, then About and Research, then Education/interests at the end */
+  .layout { display: flex; flex-direction: column; align-items: stretch; }
+  .sidebar { display: contents; }
+  .profile { order: 0; display: grid; grid-template-columns: 96px 1fr; column-gap: 18px; align-items: center; font-family: var(--sans); font-size: 15px; margin-bottom: 28px; }
+  .content { order: 1; }
+  .sidebar > .side-block { order: 2; font-family: var(--sans); font-size: 15px; margin-top: 36px; }
+  .profile .photo { width: 96px; height: 96px; margin: 0; grid-row: span 3; }
+  .profile h1 { font-size: 24px; }
+  .profile .role { margin: 4px 0 0; font-size: 14.5px; }
+  .profile .side-links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 16px; }
   .research-index li::after { display: none; }
   .research-index li { flex-wrap: wrap; }
   .research-index span { flex-basis: 100%; padding-left: calc(1.6em + 10px); white-space: normal; }
@@ -327,6 +330,17 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
   .media-row .media { flex: none; width: 100%; }
   .frames { grid-template-columns: 1fr 1fr; }
   .card-wide { grid-column: auto; }
+}
+
+/* Print / save as PDF: one clean light column */
+@media print {
+  :root, :root[data-theme="dark"] { --bg: #fff; --text: #111; --muted: #555; --rule: #ccc; --strong-rule: #111; --link: #1a5fb4; }
+  .topbar, .lightbox, .research-index { display: none !important; }
+  .layout { display: block; padding-top: 0; }
+  .js .reveal { opacity: 1; transform: none; }
+  .research-item, .media, .table-figure { break-inside: avoid; }
+  .research-item { margin-top: 32px; }
+  body { font-size: 11pt; }
 }
 
 /* Accessibility floor */
