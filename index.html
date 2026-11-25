@@ -4,25 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zongtan Li</title>
-  <meta name="description" content="Zongtan Li — Ph.D. researcher at the University of Georgia working on robot learning and embodied AI: continual skill acquisition for humanoids, faster-than-demonstration imitation, reward-free online adaptation, and recurrent policies for partial observability.">
+  <meta name="description" content="Zongtan Li (Ph.D. student, University of Georgia; visiting Georgia Tech) works on robot learning and embodied AI: whole-body touch for humanoids, faster-than-demonstration imitation, recovery updates that preserve existing behavior, and control under partial observation.">
+  <meta name="author" content="Zongtan Li">
+  <link rel="canonical" href="https://lazer2077.github.io/">
   <meta property="og:title" content="Zongtan Li — Robot Learning &amp; Embodied AI">
-  <meta property="og:description" content="Ph.D. researcher at the University of Georgia working on learned controllers that keep improving after deployment without breaking what already works.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://lazer2077.github.io/zongtanli.github.io/assets/photo.jpg">
+  <meta property="og:description" content="Ph.D. student at the University of Georgia, visiting Georgia Tech. Robot learning and embodied AI for humanoid control.">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://lazer2077.github.io/">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://lazer2077.github.io/assets/photo.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f4e79'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='30' fill='white'%3EZL%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <!-- Loaded without blocking render: Google Fonts is slow or unreachable from mainland China,
+       and the page must still appear immediately with the system fallbacks. -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Zongtan Li","url":"https://lazer2077.github.io/",
+   "image":"https://lazer2077.github.io/assets/photo.jpg","jobTitle":"Ph.D. Student",
+   "affiliation":[{"@type":"CollegeOrUniversity","name":"University of Georgia"},{"@type":"CollegeOrUniversity","name":"Georgia Institute of Technology"}],
+   "alumniOf":{"@type":"CollegeOrUniversity","name":"Fuzhou University"},
+   "knowsAbout":["Robot Learning","Embodied AI","Humanoid Whole-Body Control","Imitation Learning","Model Predictive Control"],
+   "sameAs":["https://github.com/Lazer2077","https://www.linkedin.com/in/zongtan-li-92120a28a"]}
+  </script>
   <script>
-    var t = 'dark'; try { if (localStorage.getItem('theme') === 'light') t = 'light'; } catch (e) {} document.documentElement.setAttribute('data-theme', t);
+    var t = 'dark'; try { if (localStorage.getItem('theme') === 'light') t = 'light'; } catch (e) {} document.documentElement.setAttribute('data-theme', t); document.documentElement.classList.add('js');
   </script>
 </head>
 <body>
   <header class="topbar">
     <nav class="nav container">
       <a class="brand" href="#top">Zongtan Li</a>
-      <div class="nav-links">
+      <div class="nav-links" aria-label="Sections">
         <a href="#research">Research</a>
         <a href="#publications">Publications</a>
         <a href="#projects">Projects</a>
@@ -40,6 +54,7 @@
         </button>
       </div>
     </nav>
+    <div class="progress" aria-hidden="true"><span></span></div>
   </header>
 
   <div class="layout container" id="top">
@@ -91,8 +106,7 @@
       <div class="side-block">
         <h2 class="sub">Research interests</h2>
         <div class="interests">
-          <span>Robot Learning</span><span>Embodied AI</span><span>Humanoid Whole-Body Control</span>
-          <span>Imitation Learning</span><span>POMDPs</span><span>Model Predictive Control</span>
+          <span>Robot Learning</span><span>Embodied AI</span><span>Humanoid Whole-Body Control</span><span>Imitation Learning</span><span>POMDPs</span><span>Model Predictive Control</span>
         </div>
       </div>
     </aside>
@@ -115,6 +129,18 @@
       <!-- Research -->
       <section id="research" class="section">
         <h2>Research</h2>
+        <nav class="research-index" aria-label="Research at a glance">
+          <ol>
+            <li><a href="#current-focus">Whole-body touch for humanoid robots</a><span>Current focus</span></li>
+            <li><a href="#persona-robot-bench">PersonaRobotBench: preference-aware humanoid execution</a><span>Benchmark</span></li>
+            <li><a href="#retiming">Faster imitation by re-timing demonstrations</a><span>Under review</span></li>
+            <li><a href="#sequential-recovery">Sequential recovery updates for humanoid controllers</a><span>Under review</span></li>
+            <li><a href="#etic">Correction timing for frozen policies under actuation faults</a><span>In preparation</span></li>
+            <li><a href="#decision-relevant-memory">Decision-relevant memory in partially observed control</a><span>In preparation</span></li>
+            <li><a href="#cyclic-estimation">Cyclic state estimation under partial observation</a><span>Submitted, TMLR</span></li>
+            <li><a href="#ev-eco-driving">Vehicle dynamics and powertrain co-optimization for EVs</a><span>ACC 2025</span></li>
+          </ol>
+        </nav>
 
         <article class="research-item focus" id="current-focus">
           <p class="kicker">Current focus</p>
@@ -147,7 +173,7 @@
           <p class="tags">Robot Learning, Human–Robot Interaction, Personalized Robot Execution, Humanoid Simulation</p>
         </article>
 
-        <article class="research-item">
+        <article class="research-item" id="retiming">
           <div class="research-head">
             <h3>Faster imitation by re-timing demonstrations within the controller limit</h3>
             <span class="badge">Under review</span>
@@ -207,7 +233,7 @@
           <p class="tags">Imitation Learning, Flow-Matching Policies, Robomimic / Robosuite, Humanoid Motion Tracking, Real-Robot Replay</p>
         </article>
 
-        <article class="research-item">
+        <article class="research-item" id="sequential-recovery">
           <div class="research-head">
             <h3>Sequential recovery updates for learned humanoid controllers</h3>
             <span class="badge">Under review</span>
@@ -247,6 +273,7 @@
         <article class="research-item" id="etic">
           <div class="research-head">
             <h3>Correction Fidelity and Timing for Frozen Policies under Actuation Interface Faults</h3>
+            <span class="badge">Manuscript in preparation</span>
           </div>
           <p>
             A frozen control policy can fail when an actuator interface reorders channels or reverses their signs.
@@ -269,6 +296,7 @@
         <article class="research-item" id="decision-relevant-memory">
           <div class="research-head">
             <h3>Decision-Relevant Memory in Partially Observed Control</h3>
+            <span class="badge">Manuscript in preparation</span>
           </div>
           <p>
             Which part of an early sensor reading is worth sending when the receiver may get another measurement before choosing an action?
@@ -307,6 +335,7 @@
         <article class="research-item" id="cyclic-estimation">
           <div class="research-head">
             <h3>Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation</h3>
+            <span class="badge">Submitted to TMLR</span>
           </div>
           <p>
             We study how to estimate cyclic states when observations are noisy or missing.
@@ -348,7 +377,7 @@
           <p class="tags">State Estimation, Partial Observability, Cyclic Filtering, Inertial Sensing</p>
         </article>
 
-        <article class="research-item">
+        <article class="research-item" id="ev-eco-driving">
           <div class="research-head">
             <h3>Co-optimizing vehicle dynamics and powertrain for connected electric vehicles</h3>
             <span class="badge badge-pub">ACC 2025</span>
@@ -520,6 +549,12 @@
     </main>
   </div>
 
+  <dialog class="lightbox" id="lightbox" aria-label="Enlarged figure">
+    <form method="dialog"><button class="lightbox-close" aria-label="Close">×</button></form>
+    <img alt="">
+    <p class="lightbox-caption"></p>
+  </dialog>
+
   <footer class="footer container">
     <p>© <span id="year">2026</span> Zongtan Li. Contact: <a href="mailto:zongtanli2023@gmail.com">zongtanli2023@gmail.com</a></p>
   </footer>
@@ -540,6 +575,60 @@
       });
       apply(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
       document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+
+    // Scroll progress + active section in the top bar
+    (function () {
+      var bar = document.querySelector('.progress span');
+      var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+      var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+      var ticking = false;
+      function update() {
+        ticking = false;
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - innerHeight;
+        bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, scrollY / max) : 0) + ')';
+        var current = -1;
+        sections.forEach(function (sec, i) { if (sec && sec.getBoundingClientRect().top < innerHeight * 0.35) current = i; });
+        links.forEach(function (a, i) {
+          if (i === current) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        });
+      }
+      addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      addEventListener('resize', update);
+      update();
+    })();
+
+    // Gentle reveal for research entries and figures as they enter the viewport
+    (function () {
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var items = document.querySelectorAll('.research-item, .content .media, .pubs li, .card');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      items.forEach(function (el) {
+        if (el.getBoundingClientRect().top < innerHeight) return; // already on screen: no animation
+        el.classList.add('reveal'); io.observe(el);
+      });
+    })();
+
+    // Open figures in an in-page viewer instead of a new tab
+    (function () {
+      var dlg = document.getElementById('lightbox');
+      if (!dlg || typeof dlg.showModal !== 'function') return;
+      var img = dlg.querySelector('img'), cap = dlg.querySelector('.lightbox-caption');
+      document.querySelectorAll('.media > a').forEach(function (a) {
+        a.addEventListener('click', function (ev) {
+          if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
+          ev.preventDefault();
+          var inner = a.querySelector('img');
+          var fc = a.closest('figure').querySelector('figcaption');
+          img.src = a.href; img.alt = inner ? inner.alt : '';
+          cap.textContent = fc ? fc.textContent : '';
+          dlg.showModal();
+        });
+      });
+      dlg.addEventListener('click', function (ev) { if (ev.target === dlg || ev.target === img) dlg.close(); });
     })();
   </script>
 </body>

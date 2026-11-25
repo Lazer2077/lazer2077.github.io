@@ -9,8 +9,10 @@
   --strong-rule: #1b1b1b;
   --link: #1a5fb4;
   --plate: #ffffff;       /* backing for figures/logos drawn on white */
-  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* CJK system faces follow the Latin ones so Chinese text never falls back to a bitmap-looking default */
+  --serif: "Source Serif 4", Georgia, "Times New Roman", "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
+  --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,8 +68,17 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
 .brand { font-family: var(--serif); font-weight: 600; font-size: 18px; color: var(--text); }
 .brand:hover { text-decoration: none; }
 .nav-links { display: flex; gap: 22px; margin-left: auto; font-family: var(--sans); font-size: 15px; }
-.nav-links a { color: var(--muted); }
-.nav-links a:hover { color: var(--text); text-decoration: none; }
+.nav-links a { position: relative; color: var(--muted); transition: color .2s; }
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--text); text-decoration: none; }
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+  background: var(--link); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease);
+}
+.nav-links a[aria-current]::after { transform: scaleX(1); }
+
+/* Reading progress, a hairline under the top bar */
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+.progress span { display: block; height: 100%; background: var(--link); transform: scaleX(0); transform-origin: left; opacity: .8; }
 
 .theme-switch { display: inline-flex; gap: 6px; }
 .theme-switch button {
@@ -92,7 +103,7 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
 /* Sidebar */
 .sidebar { font-family: var(--sans); font-size: 15px; }
 .photo {
-  display: block; width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+  display: block; transition: transform .4s var(--ease); width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
   margin-bottom: 18px;
 }
 .sidebar h1 { font-size: 28px; }
@@ -146,6 +157,17 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
 .research-item > p { margin: 0 0 12px; max-width: 38em; }
 .research-head { margin-bottom: 10px; }
 .research-head h3 { font-size: 23px; }
+
+/* Research at a glance: a dotted-leader index so a recruiter can scan all projects in one screen */
+.research-index { font-family: var(--sans); font-size: 15px; margin: -6px 0 44px; }
+.research-index ol { list-style: none; padding: 0; margin: 0; counter-reset: ri; }
+.research-index li { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; counter-increment: ri; }
+.research-index li::before { content: counter(ri, decimal-leading-zero); color: var(--muted); font-variant-numeric: tabular-nums; font-size: 13px; width: 1.6em; flex: none; }
+.research-index a { color: var(--text); }
+.research-index a:hover { color: var(--link); }
+.research-index li::after { content: ""; order: 1; flex: 1; border-bottom: 1px dotted var(--rule); transform: translateY(-4px); min-width: 16px; }
+.research-index span { order: 2; color: var(--muted); font-size: 13.5px; white-space: nowrap; }
+.research-item { scroll-margin-top: 72px; }
 .badge { display: block; margin-top: 3px; font-family: var(--sans); font-size: 15px; font-style: italic; color: var(--muted); }
 .badge-pub { color: var(--muted); }
 .kicker { font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--link); margin: 0 0 4px !important; }
@@ -167,6 +189,9 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
 /* Figures */
 .media { margin: 18px 0; }
 .media video, .media img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.media > a { display: block; cursor: zoom-in; }
+.media > a img { transition: opacity .2s; }
+.media > a:hover img { opacity: .92; }
 .media figcaption { font-family: var(--sans); font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
 .figure-plot img { background: var(--plate); }
 .figure-lead img { max-width: 720px; margin: 0 auto; }
@@ -246,6 +271,25 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
 .poem figcaption { font-size: 20px; font-weight: 500; letter-spacing: .3em; margin-bottom: 8px; }
 .poem p { margin: 0 0 4px; font-size: 16px; letter-spacing: .12em; color: var(--muted); }
 
+/* Scroll reveal (only applied by JS to elements below the fold, and never with reduced motion) */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.js .reveal.in { opacity: 1; transform: none; }
+
+/* Figure viewer */
+.lightbox {
+  max-width: min(1400px, 94vw); max-height: 92vh; padding: 0; border: 0; border-radius: 6px;
+  background: var(--bg); color: var(--text); overflow: auto;
+}
+.lightbox::backdrop { background: rgba(0, 0, 0, .72); }
+.lightbox[open] { animation: lb-in .22s var(--ease); }
+.lightbox img { display: block; max-width: 100%; max-height: 80vh; margin: 0 auto; background: var(--plate); cursor: zoom-out; }
+.lightbox-caption { font-family: var(--sans); font-size: 14px; color: var(--muted); margin: 0; padding: 10px 16px 14px; max-width: 70em; }
+.lightbox-close {
+  position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; border-radius: 50%;
+  border: 0; background: rgba(0, 0, 0, .55); color: #fff; font-size: 22px; line-height: 1; cursor: pointer;
+}
+@keyframes lb-in { from { opacity: 0; transform: scale(.98); } to { opacity: 1; transform: none; } }
+
 .footer { padding-top: 44px; padding-bottom: 40px; font-family: var(--sans); font-size: 14px; color: var(--muted); }
 .footer p { border-top: 1px solid var(--rule); padding-top: 18px; margin: 0; }
 
@@ -256,8 +300,28 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.25; margin: 0; font-weigh
 
 @media (max-width: 720px) {
   body { font-size: 16.5px; }
-  .nav-links { display: none; }
-  .nav { justify-content: space-between; }
+  /* Section links stay reachable on phones as a second, swipeable row */
+  .nav { flex-wrap: wrap; height: auto; padding-top: 10px; gap: 6px 12px; justify-content: space-between; }
+  .nav-links {
+    order: 3; width: 100%; margin: 0; gap: 18px; overflow-x: auto; scrollbar-width: none;
+    padding: 4px 0 10px; font-size: 14.5px;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { white-space: nowrap; }
+  html { scroll-padding-top: 100px; }
+  .research-item { scroll-margin-top: 104px; }
+  .theme-switch button span { display: none; }
+  .theme-switch button { padding: 0 9px; }
+  /* Compact profile header: photo beside the name */
+  .sidebar { display: grid; grid-template-columns: 96px 1fr; column-gap: 18px; align-items: center; }
+  .sidebar > .photo { width: 96px; height: 96px; margin: 0; grid-row: span 3; }
+  .sidebar > h1 { font-size: 24px; }
+  .sidebar > .role { margin: 4px 0 0; font-size: 14.5px; }
+  .sidebar > .side-links, .sidebar > .side-block { grid-column: 1 / -1; }
+  .sidebar > .side-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 16px; }
+  .research-index li::after { display: none; }
+  .research-index li { flex-wrap: wrap; }
+  .research-index span { flex-basis: 100%; padding-left: calc(1.6em + 10px); white-space: normal; }
   .media-grid, .two-col, .music, .cards { grid-template-columns: 1fr; gap: 0 24px; }
   .media-row { flex-direction: column; }
   .media-row .media { flex: none; width: 100%; }
