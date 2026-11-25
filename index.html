@@ -247,40 +247,22 @@
           <p class="tags">Humanoid Control, Residual Feedback Skills, Gated Skill Composition, Behavior Preservation</p>
         </article>
 
-        <article class="research-item">
+        <article class="research-item" id="etic">
           <div class="research-head">
-            <h3>Efference-copy adaptation for frozen control policies</h3>
-            <span class="badge">Under review</span>
+            <h3>Correction Fidelity and Timing for Frozen Policies under Actuation Interface Faults</h3>
           </div>
           <p>
-            Learned policies can fail after deployment when actuator ordering, direction or gain differs from training.
-            Identifying and inverting the actuator map fixes that, but applying an inverse when no such fault exists damages feedback that was working.
-            ECA keeps the policy frozen and corrects its outgoing commands under the best-supported hypothesis: a static map, a velocity-coupled disturbance, or no fault.
-            It withdraws when the identity or a delayed identity explains recent transitions better, decides only on informative data, and never amplifies the command it corrects.
+            A frozen policy can fail when actuator channels are reordered or their signs are reversed.
+            We replay trials with the simulator's exact inverse both at the controller's intervention time and at a reference time
+            to measure how much recovery depends on intervening sooner or correcting the command more accurately.
+            Evidence-Triggered Input Compensation (ETIC) scores a fixed library of candidate faults against observed actuator responses
+            and applies the inverse of the best-supported candidate.
           </p>
           <div class="stats">
-            <div class="stat"><strong>+42.7 / +65.1</strong><span>return on actuator permutation and orthogonal mix, where identification alone loses return</span></div>
-            <div class="stat"><strong>0</strong><span>residual delay loss, vs. 44.6 and 113.2 return lost by plain identification</span></div>
+            <div class="stat"><strong>495/528</strong><span>recoveries across four simulated tasks for faults in the candidate library, versus 30/528 without correction and 509/528 with the immediate exact inverse</span></div>
+            <div class="stat"><strong>143/144</strong><span>fault-free trajectories reproduced exactly</span></div>
           </div>
-          <figure class="media figure-plot figure-lead">
-            <a href="assets/research/eca-flow.png" target="_blank" rel="noopener"><img src="assets/research/eca-flow.png" width="892" height="322" loading="lazy" alt="ECA data flow: policy, compensate, body, predict, estimate, reject and select"></a>
-            <figcaption>ECA data flow. The compensator corrects the command being executed now and learns from it for the next step.</figcaption>
-          </figure>
-          <figure class="media table-figure">
-            <div class="table-wrap">
-              <table class="data-table">
-                <thead><tr><th>Held-out cohort</th><th>Worst loss</th><th>90° rotation</th><th>120° rotation</th><th>Input-map mean</th></tr></thead>
-                <tbody>
-                  <tr><th scope="row">Reacher, identify &amp; invert</th><td>56.4 <small>(delay)</small></td><td>+29.8</td><td>+37.8</td><td>+19.2</td></tr>
-                  <tr class="ours"><th scope="row">Reacher, ECA</th><td><b>0.0</b></td><td><b>+31.7</b></td><td><b>+44.3</b></td><td><b>+26.6</b></td></tr>
-                  <tr><th scope="row">Pusher, identify &amp; invert</th><td>116.6 <small>(delay)</small></td><td>+75.2</td><td>+98.4</td><td>+41.4</td></tr>
-                  <tr class="ours"><th scope="row">Pusher, ECA</th><td><b>1.2</b> <small>(gain 0.5)</small></td><td><b>+75.9</b></td><td><b>+104.7</b></td><td><b>+54.7</b></td></tr>
-                </tbody>
-              </table>
-            </div>
-            <figcaption>Evaluated once on policies trained after the method was frozen. Gains are return over the frozen policy; worst loss is the largest return lost on a condition that needs no correction (lower is better).</figcaption>
-          </figure>
-          <p class="tags">Online Adaptation, Adaptive Control, Fault-Tolerant Control, Frozen Policies, MuJoCo</p>
+          <p class="tags">Frozen Policies, Fault Recovery, System Identification, Robot Control</p>
         </article>
 
         <article class="research-item">
@@ -322,58 +304,22 @@
           <p class="tags">Reinforcement Learning, POMDPs, Recurrent Policies, Belief Filtering</p>
         </article>
 
-        <article class="research-item">
+        <article class="research-item" id="cyclic-estimation">
           <div class="research-head">
-            <h3>A group-structured Born recurrence for cyclic state tracking</h3>
+            <h3>Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation</h3>
           </div>
           <p>
-            Some partially observed tasks reward the agent only at the end, based on a running count modulo <em>k</em>, such as whether a hidden toggle is on.
-            Gated recurrences fail to learn even parity here, and Transformers learn a shortcut that collapses beyond the training length.
-            This quantum-inspired policy stores the count as the angle of a rotating phase and reads out actions with the Born rule, so interference among action amplitudes decodes the count.
-            I prove that a minimal two-channel version encodes the count exactly, independent of episode length.
+            Cyclic states such as a heading, a gait phase, or a valve position wrap after a known period.
+            Exact increments can update the state with a phase rotation. When increments are uncertain,
+            a cyclic filter tracks several possible shifts and updates their probabilities when a position measurement arrives.
+            The study tests this approach on simulated valve tracking and recorded inertial and gait data,
+            and examines how the estimated probabilities affect when a controller takes another measurement.
           </p>
           <div class="stats">
-            <div class="stat"><strong>14 → 1,600</strong><span>steps: trained on length 14, still succeeds at length 1,600 on every group Z<sub>2</sub>–Z<sub>5</sub></span></div>
-            <div class="stat"><strong>~400</strong><span>trainable parameters</span></div>
-            <div class="stat"><strong>9×</strong><span>faster to near-optimal return on Z<sub>3</sub> than a Transformer 16× larger</span></div>
+            <div class="stat"><strong>12.33% to 9.04%</strong><span>gait-phase RMSE as a share of a cycle with three-second sensor dropouts, comparing an LSTM with the cyclic filter</span></div>
+            <div class="stat"><strong>5.839 to 0.966 nats</strong><span>final-state negative log likelihood on a simulated valve with 1% misread tokens, comparing exact-token and uncertainty-aware updates</span></div>
           </div>
-          <figure class="media figure-plot figure-lead">
-            <a href="assets/research/born-diagram.jpg" target="_blank" rel="noopener"><img src="assets/research/born-diagram.jpg" width="1200" height="800" loading="lazy" alt="A traditional recurrent policy with contractive memory and softmax readout, next to the Born-rule policy with a phase that advances per event and an interference-based Born readout"></a>
-            <figcaption>A traditional recurrent policy must learn a periodic code from reward. The Born-rule policy builds the cyclic structure in: each event advances a phase, and the Born readout decodes it.</figcaption>
-          </figure>
-          <figure class="media table-figure">
-            <div class="table-wrap">
-              <table class="data-table">
-                <thead><tr><th>Length generalization</th><th>Params</th><th>Z<sub>2</sub> (parity)</th><th>Z<sub>3</sub></th><th>Z<sub>4</sub></th><th>Z<sub>5</sub></th></tr></thead>
-                <tbody>
-                  <tr class="ours"><th scope="row">Born recurrence (ours)</th><td>337–433</td><td><b>9/10</b></td><td><b>9/10</b></td><td>6/10</td><td><b>9/10</b></td></tr>
-                  <tr><th scope="row">GRU</th><td>3.7k</td><td>0/10</td><td>10/10</td><td>10/10</td><td>9/10</td></tr>
-                  <tr><th scope="row">LSTM</th><td>5.0k</td><td>1/10</td><td>9/10</td><td>10/10</td><td>10/10</td></tr>
-                  <tr><th scope="row">Transformer</th><td>20k</td><td>0/10</td><td>0/10</td><td>0/10</td><td>0/10</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <figcaption>Seeds (of 10) that still track the count at length 1,600 after training on length ≤ 14; the Transformer is evaluated at 400, the longest it reaches. Only Born is above chance on every group.</figcaption>
-          </figure>
-          <figure class="media table-figure">
-            <div class="table-wrap">
-              <table class="data-table">
-                <thead><tr><th>Sparse terminal reward</th><th>GRU <small>1.1k</small></th><th>LSTM <small>1.5k</small></th><th>Transformer <small>5.9k</small></th><th>Born <small>0.4k</small></th></tr></thead>
-                <tbody>
-                  <tr><th scope="row">Parity, success</th><td>0.50</td><td>0.50</td><td>0.88</td><td><b>0.90</b></td></tr>
-                  <tr><th scope="row">Parity, steps to target</th><td>never</td><td>never</td><td>15.7M</td><td><b>2.6M</b></td></tr>
-                  <tr><th scope="row">Z<sub>3</sub>, success</th><td>0.40</td><td>0.33</td><td>0.97</td><td><b>0.99</b></td></tr>
-                  <tr><th scope="row">Z<sub>3</sub>, steps to target</th><td>never</td><td>never</td><td>2.43M</td><td><b>0.26M</b></td></tr>
-                </tbody>
-              </table>
-            </div>
-            <figcaption>Reinforcement learning from a single end-of-episode reward, five seeds. Born reaches the target with about 6× (parity) and 9× (Z<sub>3</sub>) fewer environment steps than a Transformer 16× larger; gated recurrences never exceed chance.</figcaption>
-          </figure>
-          <p>
-            Follow-up work compares ways to encode cyclic structure in the state transition and the belief update
-            when observations are noisy or missing, including heading estimation from recorded inertial measurements.
-          </p>
-          <p class="tags">Reinforcement Learning, POMDPs, Recurrent Policies, Quantum-Inspired Networks</p>
+          <p class="tags">State Estimation, Partial Observability, Cyclic Filtering, Inertial Sensing</p>
         </article>
 
         <article class="research-item">
@@ -431,16 +377,15 @@
             <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
           <li><span class="title">Faster Imitation by Re-timing Demonstrations Within the Controller Limit.</span>
             <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
-          <li><span class="title">ECA: Efference-Copy Adaptation for Frozen Control Policies.</span>
-            <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
         </ol>
 
         <h3 class="pub-group">Manuscripts in preparation</h3>
         <ol class="pubs">
           <li><span class="title">Decision-Relevant Memory in Partially Observed Control.</span>
             <span class="authors"><b>Z. Li</b>.</span></li>
-          <li><span class="title">Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation.</span>
+          <li><span class="title"><a href="#cyclic-estimation">Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation.</a></span>
             <span class="authors"><b>Z. Li</b>.</span></li>
+          <li><span class="title"><a href="#etic">Correction Fidelity and Timing for Frozen Policies under Actuation Interface Faults.</a></span></li>
         </ol>
 
         <h3 class="pub-group">Papers and preprints</h3>
