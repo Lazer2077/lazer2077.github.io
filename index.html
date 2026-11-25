@@ -105,10 +105,9 @@
           I work on robot learning and embodied AI.
         </p>
         <p>
-          My work is about what robots can learn from their own physical interaction, and how far they can trust it.
-          I study how a robot can identify an object's physical properties through active touch and vision,
-          and how learned controllers can keep improving after deployment without breaking what they already do.
-          I build on reinforcement and imitation learning, optimal control, simulation and real-robot experiments.
+          I study how learned controllers can make reliable decisions when observations are incomplete or physical conditions change.
+          My dissertation focuses on action decoding, recovery without losing existing capabilities, and active tactile sensing for humanoid control.
+          I am also exploring how these ideas apply to autonomous scanning-probe measurements.
         </p>
       </section>
 
@@ -116,26 +115,29 @@
       <section id="research" class="section">
         <h2>Research</h2>
 
-        <article class="research-item focus">
+        <article class="research-item focus" id="current-focus">
           <p class="kicker">Current focus</p>
           <div class="research-head">
-            <h3>Active multimodal identification of object mechanics</h3>
+            <h3>Reliable robot control and active probing</h3>
             <span class="badge">In progress</span>
           </div>
           <p class="focus-question">
-            What can a robot learn about an object's physics from a few real interactions, and how far can it trust it?
+            When is the current observation sufficient to act, and when is another physical measurement worth taking?
           </p>
           <p>
-            A touch mixes the object with the sensor and the contact, so one signal can have several physical explanations.
-            I study how a robot can choose presses, slides and lifts, with touch and vision, that tell these explanations apart,
-            and report stiffness, friction and mass along with the interactions they can reliably predict.
+            My dissertation studies how a learned controller should choose an action from a policy's predictions,
+            add a recovery behavior while preserving prior successes, and use touch to improve contact decisions in humanoid loco-manipulation.
           </p>
-          <div class="focus-flow" aria-label="Research relation">
-            <span>Actions &amp; sensing</span><span class="arrow" aria-hidden="true">→</span>
-            <span>Distinguishable explanations</span><span class="arrow" aria-hidden="true">→</span>
-            <span>Reliable predictions</span>
-          </div>
-          <p class="tags">Active Perception, Tactile Sensing, Visuo-Tactile Fusion, System Identification, Experimental Design</p>
+          <p>
+            I am exploring autonomous scanning-probe microscopy as a related application.
+            The first proposed study is to test whether a workflow can locate a bowtie structure on a reference sample,
+            choose the next scan location, and obtain a usable scan. I plan to evaluate scan quality, human interventions, and unnecessary rescans.
+          </p>
+          <p>
+            Two proposed experiments ask whether an extra measurement improves the next decision: predicting a nickelate film's
+            response to a write pulse, and locating a semiconductor interface by choosing where to scan or when to change excitation energy.
+          </p>
+          <p class="tags">Robot Learning, Active Sensing, Recovery, Tactile Perception, Scanning-Probe Microscopy</p>
         </article>
 
         <article class="research-item">
@@ -314,16 +316,42 @@
             <h3>Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation</h3>
           </div>
           <p>
-            Cyclic states such as a heading, a gait phase, or a valve position wrap after a known period.
-            Exact increments can update the state with a phase rotation. When increments are uncertain,
-            a cyclic filter tracks several possible shifts and updates their probabilities when a position measurement arrives.
-            The study tests this approach on simulated valve tracking and recorded inertial and gait data,
-            and examines how the estimated probabilities affect when a controller takes another measurement.
+            This follow-up extends cyclic counting to state estimation with noisy and missing observations.
+            When an increment is observed exactly, a phase rotation advances the state. When it is uncertain, a cyclic filter
+            assigns probability to several possible shifts and revises its belief when a measurement arrives.
+            A shared planner uses these estimates to test how belief quality changes the decision to sense again.
           </p>
           <div class="stats">
-            <div class="stat"><strong>12.33% to 9.04%</strong><span>gait-phase RMSE as a share of a cycle with three-second sensor dropouts, comparing an LSTM with the cyclic filter</span></div>
-            <div class="stat"><strong>5.839 to 0.966 nats</strong><span>final-state negative log likelihood on a simulated valve with 1% misread tokens, comparing exact-token and uncertainty-aware updates</span></div>
+            <div class="stat"><strong>5.839 to 0.966 nats</strong><span>final-state negative log likelihood in a simulated valve with 1% token misreads; matched Bayes reached 0.965 nats</span></div>
+            <div class="stat"><strong>20.2° to 12.8°</strong><span>120-second heading error on BROAD when a bias state is added to phase rotation</span></div>
+            <div class="stat"><strong>12.33% to 9.04%</strong><span>gait-phase RMSE as a share of a cycle, comparing LSTM with the cyclic filter with three-second sensor dropouts on Camargo</span></div>
           </div>
+          <figure class="media figure-plot">
+            <a href="assets/research/cyclic-heading.webp" target="_blank" rel="noopener"><img src="assets/research/cyclic-heading.webp" width="1407" height="420" loading="lazy" alt="Two BROAD heading plots compare estimation methods across window lengths and show drift with and without a gyroscope bias state"></a>
+            <figcaption>BROAD inertial heading estimation. Left: error at the end of each window. Right: example heading drift with and without bias correction. From Figure 5a–b of the manuscript.</figcaption>
+          </figure>
+          <figure class="media figure-plot">
+            <a href="assets/research/cyclic-gait-dropout.webp" target="_blank" rel="noopener"><img src="assets/research/cyclic-gait-dropout.webp" width="1407" height="447" loading="lazy" alt="A gait-phase trace during a dropout, RMSE across dropout lengths, and paired results showing lower cyclic-filter error for all six test subjects at three seconds"></a>
+            <figcaption>Camargo gait-phase estimation. With three-second sensor dropouts, the cyclic filter lowered RMSE for all six held-out subjects. The mean reduction was 3.13 percentage points with a 95% subject-bootstrap interval of 2.30 to 3.99 points. From Figure 6 of the manuscript.</figcaption>
+          </figure>
+          <figure class="media table-figure">
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead><tr><th scope="col">Simulated valve estimator</th><th scope="col">Final-state NLL (nats) ↓</th><th scope="col">Accuracy ↑</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Cyclic filter, treats tokens as exact</th><td>5.839</td><td>68.3%</td></tr>
+                  <tr><th scope="row">LSTM</th><td>1.386</td><td>25.7%</td></tr>
+                  <tr class="ours"><th scope="row">Cyclic filter, models token misreads</th><td><b>0.966</b></td><td>68.3%</td></tr>
+                  <tr><th scope="row">Matched Bayes reference</th><td>0.965</td><td>68.3%</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <figcaption>Table 4 results with terminal-label supervision, 40 steps, and a 1% token misread rate. The two cyclic filters achieve the same final-state accuracy. Modeling misreads improves the probabilities assigned to the possible states.</figcaption>
+          </figure>
+          <p>
+            With the same planner and simulated valve observations, the token-constrained cyclic filter achieved 63.0 utility points versus 62.3 for GRU
+            and 63.3 for matched Bayes in the default setting. The learned filter matched or exceeded GRU across 75 settings, with a positive paired bootstrap interval in 47.
+          </p>
           <p class="tags">State Estimation, Partial Observability, Cyclic Filtering, Inertial Sensing</p>
         </article>
 
