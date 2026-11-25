@@ -252,11 +252,16 @@
             <h3>Correction Fidelity and Timing for Frozen Policies under Actuation Interface Faults</h3>
           </div>
           <p>
-            A frozen policy can fail when actuator channels are reordered or their signs are reversed.
-            We replay trials with the simulator's exact inverse both at the controller's intervention time and at a reference time
-            to measure how much recovery depends on intervening sooner or correcting the command more accurately.
-            Evidence-Triggered Input Compensation (ETIC) scores a fixed library of candidate faults against observed actuator responses
-            and applies the inverse of the best-supported candidate.
+            This work follows up on Efference-Copy Adaptation (ECA), which used prediction errors from a model of the healthy system
+            to correct a frozen policy's commands online. We focus on actuator interface faults and ask whether recovery fails
+            because the correction starts too late or because the command sent at that time is inaccurate.
+          </p>
+          <p>
+            We replay trials with the simulator's exact inverse at the controller's intervention time and at a reference time
+            to measure the two effects. For Humanoid channel permutations, delaying exact correction by eight steps reduced recoveries
+            from 16 to 3 out of 16. Evidence-Triggered Input Compensation (ETIC) scores a fixed library of candidate faults
+            against observed actuator responses and applies the best-supported inverse. On Reacher double sign reversals,
+            selecting a single inverse raised recovery from 20 to 43 out of 43 compared with averaging candidate corrections.
           </p>
           <div class="stats">
             <div class="stat"><strong>495/528</strong><span>recoveries across four simulated tasks for faults in the candidate library, versus 30/528 without correction and 509/528 with the immediate exact inverse</span></div>
