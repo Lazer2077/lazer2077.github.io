@@ -340,8 +340,8 @@
             I validated it in a VISSIM simulation of a real signalized corridor in Chattanooga, TN, calibrated with real-world data.
           </p>
           <div class="stats">
-            <div class="stat"><strong>12.8–24.5%</strong><span>lower energy use than the preceding vehicle in traffic, across four test vehicles</span></div>
-            <div class="stat"><strong>3.2–4.4%</strong><span>of that from optimized dual-motor torque allocation alone</span></div>
+            <div class="stat"><strong>12.8–24.5%</strong><span>less battery state-of-charge depletion than the preceding vehicle, across four cases with ideal traffic predictions</span></div>
+            <div class="stat"><strong>3.2–4.4%</strong><span>lower traction power with optimized front/rear motor torque allocation than with a fixed split</span></div>
             <div class="stat"><strong>&lt; 1<small> s</small></strong><span>average solve time for a 15 s prediction horizon</span></div>
           </div>
           <figure class="media figure-plot">
@@ -356,7 +356,7 @@
             <figure class="media table-figure">
               <div class="table-wrap">
                 <table class="data-table">
-                  <thead><tr><th>Vehicle</th><th>Energy saved</th><th>From torque split</th><th>Solve time</th></tr></thead>
+                  <thead><tr><th>Vehicle</th><th>SOC depletion reduction</th><th>Traction power reduction</th><th>Solve time</th></tr></thead>
                   <tbody>
                     <tr><th scope="row">#101</th><td>12.80%</td><td>3.92%</td><td>0.86 s</td></tr>
                     <tr><th scope="row">#9799</th><td><b>24.52%</b></td><td>4.40%</td><td>0.92 s</td></tr>
@@ -365,7 +365,7 @@
                   </tbody>
                 </table>
               </div>
-              <figcaption>Battery energy saved relative to the preceding vehicle, the part due to optimized dual-motor torque allocation alone, and average NMPC solve time for a 15 s horizon.</figcaption>
+              <figcaption>Under ideal traffic predictions, battery state-of-charge depletion is compared with the preceding vehicle. The torque split comparison uses a fixed split at the same speed profile. Solve times are averages for a 15 s prediction horizon.</figcaption>
             </figure>
           </div>
           <p class="tags">NMPC, CasADi, Eco-Driving, Dual-Motor EV, Connected and Automated Vehicles</p>
@@ -379,17 +379,21 @@
         <h3 class="pub-group">Under review</h3>
         <ol class="pubs">
           <li><span class="title">Sequential Recovery Updates for Learned Controllers under Successful-Trajectory Preservation.</span>
-            <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
+            <span class="authors"><b>Z. Li</b>, T. Liu, Y. Zhao.</span> <span class="venue">Under review.</span></li>
           <li><span class="title">Faster Imitation by Re-timing Demonstrations Within the Controller Limit.</span>
-            <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
+            <span class="authors"><b>Z. Li</b>, Y. Zhao, T. Liu.</span> <span class="venue">Under review.</span></li>
+        </ol>
+
+        <h3 class="pub-group">Submitted manuscripts</h3>
+        <ol class="pubs">
+          <li><span class="title"><a href="#cyclic-estimation">Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation.</a></span>
+            <span class="authors"><b>Z. Li</b>, P. Shu, H. Jiang, T. Liu.</span> <span class="venue">Submitted to TMLR.</span></li>
         </ol>
 
         <h3 class="pub-group">Manuscripts in preparation</h3>
         <ol class="pubs">
           <li><span class="title">Decision-Relevant Memory in Partially Observed Control.</span>
-            <span class="authors"><b>Z. Li</b>.</span></li>
-          <li><span class="title"><a href="#cyclic-estimation">Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation.</a></span>
-            <span class="authors"><b>Z. Li</b>.</span></li>
+            <span class="authors"><b>Z. Li</b>, T. Liu.</span></li>
           <li><span class="title"><a href="#etic">Correction Fidelity and Timing for Frozen Policies under Actuation Interface Faults.</a></span></li>
         </ol>
 
