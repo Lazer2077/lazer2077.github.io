@@ -140,6 +140,18 @@
 
         <article class="research-item">
           <div class="research-head">
+            <h3>PersonaRobotBench</h3>
+          </div>
+          <p>
+            A benchmark for evaluating whether robot policies infer a user's preferences and carry them out.
+            Across 100 everyday tasks and 217 preference variants, the benchmark evaluates preference inference and physical execution separately.
+            A simulated Unitree G1 starts from the same scene and receives the same instruction across variants, allowing comparisons across target preferences under matched starting conditions.
+          </p>
+          <p class="tags">Robot Learning, Human–Robot Interaction, Personalized Robot Execution, Humanoid Simulation</p>
+        </article>
+
+        <article class="research-item">
+          <div class="research-head">
             <h3>Faster imitation by re-timing demonstrations within the controller limit</h3>
             <span class="badge">Under review</span>
           </div>
@@ -274,7 +286,6 @@
         <article class="research-item">
           <div class="research-head">
             <h3>Heterogeneous recurrence for partially observed control</h3>
-            <span class="badge">Under review</span>
           </div>
           <p>
             Memory architectures for partially observed control are usually ranked by average return, without asking whether their inductive bias matches what the observation hides.
@@ -304,13 +315,16 @@
             </div>
             <figcaption>Masked MuJoCo with positions observed and velocities hidden. Both arms get the same per-environment learning-rate search; on held-out seeds the lead over TransformerXL is +0.456 normalized IQM.</figcaption>
           </figure>
+          <p>
+            Follow-up work asks which distinctions a memory with a fixed bit budget must preserve for a later control decision,
+            and how the best encoding changes when the controller can obtain another measurement.
+          </p>
           <p class="tags">Reinforcement Learning, POMDPs, Recurrent Policies, Belief Filtering</p>
         </article>
 
         <article class="research-item">
           <div class="research-head">
             <h3>A group-structured Born recurrence for cyclic state tracking</h3>
-            <span class="badge">Under review</span>
           </div>
           <p>
             Some partially observed tasks reward the agent only at the end, based on a running count modulo <em>k</em>, such as whether a hidden toggle is on.
@@ -355,6 +369,10 @@
             </div>
             <figcaption>Reinforcement learning from a single end-of-episode reward, five seeds. Born reaches the target with about 6× (parity) and 9× (Z<sub>3</sub>) fewer environment steps than a Transformer 16× larger; gated recurrences never exceed chance.</figcaption>
           </figure>
+          <p>
+            Follow-up work compares ways to encode cyclic structure in the state transition and the belief update
+            when observations are noisy or missing, including heading estimation from recorded inertial measurements.
+          </p>
           <p class="tags">Reinforcement Learning, POMDPs, Recurrent Policies, Quantum-Inspired Networks</p>
         </article>
 
@@ -415,10 +433,14 @@
             <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
           <li><span class="title">ECA: Efference-Copy Adaptation for Frozen Control Policies.</span>
             <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
-          <li><span class="title">Heterogeneous Recurrence for Partially Observed Control.</span>
-            <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
-          <li><span class="title">A Group-Structured Born Recurrence for Horizon-Invariant Cyclic-Group State Tracking.</span>
-            <span class="authors"><b>Z. Li</b>.</span> <span class="venue">Under review.</span></li>
+        </ol>
+
+        <h3 class="pub-group">Manuscripts in preparation</h3>
+        <ol class="pubs">
+          <li><span class="title">Decision-Relevant Memory in Partially Observed Control.</span>
+            <span class="authors"><b>Z. Li</b>.</span></li>
+          <li><span class="title">Structure Follows Uncertainty: Cyclic State Estimation and Control under Partial Observation.</span>
+            <span class="authors"><b>Z. Li</b>.</span></li>
         </ol>
 
         <h3 class="pub-group">Papers and preprints</h3>
